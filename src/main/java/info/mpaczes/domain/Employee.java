@@ -1,6 +1,7 @@
 package info.mpaczes.domain;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -8,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -36,6 +39,13 @@ public class Employee {
 	@JoinColumn(name = "addressId")				// taka kolumna zostanie w tej tabeli utworzona i bedzie wskazywala identyfikator adresu (jest to klucz glowny adresu)
 	private Address address;
 
+	@OneToMany(mappedBy = "employee")
+	// @JoinColumn(name = "owner_id")
+	private List<Phone> phones;
+	
+	@ManyToMany(mappedBy = "employees")
+	private List<Project> projects;
+	
 	public long getId() {
 		return id;
 	}
@@ -82,6 +92,22 @@ public class Employee {
 
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+
+	public List<Phone> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(List<Phone> phones) {
+		this.phones = phones;
+	}
+
+	public List<Project> getProjects() {
+		return projects;
+	}
+
+	public void setProjects(List<Project> projects) {
+		this.projects = projects;
 	}
 
 }

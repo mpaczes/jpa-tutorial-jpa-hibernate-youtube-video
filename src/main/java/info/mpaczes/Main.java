@@ -1,18 +1,17 @@
 package info.mpaczes;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
-import info.mpaczes.domain.Address;
-import info.mpaczes.domain.Employee;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
+
+import info.mpaczes.domain.Cat;
+import info.mpaczes.domain.Employee;
+import info.mpaczes.domain.Owner;
+import info.mpaczes.domain.Phone;
+import info.mpaczes.domain.Project;
 
 public class Main {
 	
@@ -62,7 +61,7 @@ public class Main {
 //		entityManager.persist(employee);
 //		entityManager.persist(address);
 		
-		addEmployees();
+//		addEmployees();
 		
 		// jezyk JPQL (czyli Java Persistence Query Language)
 		// pobieramy dane z encji :
@@ -130,15 +129,15 @@ public class Main {
 		
 		// JPQL -- funkcje na stringach :
 		
-		Query query = entityManager.createQuery(" select substring(e.firstName, 1, 3), trim(e.lastName), lower(e.firstName), upper(e.firstName), length(e.firstName) from Pracownik e where e.firstName = 'Karol' ");
-		
-		Object[] result = (Object[]) query.getSingleResult();
-		
-		System.out.println("piersze trzy litery imeinia -- " + result[0]);
-		System.out.println("nazwisko bez spacji -- |" + result[1] + "|");
-		System.out.println("imie malymi literami -- " + result[2]);
-		System.out.println("imie duzymi literami -- " + result[3]);
-		System.out.println("dlugosc imienia -- " + result[4]);
+//		Query query = entityManager.createQuery(" select substring(e.firstName, 1, 3), trim(e.lastName), lower(e.firstName), upper(e.firstName), length(e.firstName) from Pracownik e where e.firstName = 'Karol' ");
+//		
+//		Object[] result = (Object[]) query.getSingleResult();
+//		
+//		System.out.println("piersze trzy litery imeinia -- " + result[0]);
+//		System.out.println("nazwisko bez spacji -- |" + result[1] + "|");
+//		System.out.println("imie malymi literami -- " + result[2]);
+//		System.out.println("imie duzymi literami -- " + result[3]);
+//		System.out.println("dlugosc imienia -- " + result[4]);
 		
 //		entityManager.getTransaction().commit();
 		
@@ -148,6 +147,64 @@ public class Main {
 //		entityManager.remove(employee);				// uchwyt do pracownika
 //		
 //		entityManager.getTransaction().commit();
+		
+		// relacje :
+		// jeden do jednego (dwukierunkowa -- biderictional) :
+//		Cat cat = new Cat();
+//		Owner owner = new Owner();
+//		
+//		cat.setName("Bonifacy");
+//		
+//		owner.setFirstName("Jan");
+//		owner.setLastName("Nowak");
+//		
+//		owner.setCat(cat);
+		
+		entityManager.getTransaction().begin();
+//		entityManager.persist(owner);
+//		entityManager.persist(cat);
+		// relacja jeden do wielu :
+		Employee employee = new Employee();
+		
+		employee.setFirstName("Jan");
+		employee.setLastName("Nowak");
+		employee.setSalary(3333.3);
+		
+//		Phone phone1 = new Phone();
+//		Phone phone2 = new Phone();
+//		
+//		phone1.setType("mobile");
+//		phone1.setNumber("4321");
+//		phone1.setEmployee(employee);
+//		phone2.setType("home");
+//		phone2.setNumber("7890");
+//		phone2.setEmployee(employee);
+//		
+//		List<Phone> phones = new ArrayList<Phone>();
+//		phones.add(phone1);
+//		phones.add(phone2);
+//		
+//		employee.setPhones(phones);
+//		
+//		entityManager.persist(phone1);
+//		entityManager.persist(phone2);
+		
+		Project project1 = new Project();
+		project1.setName("Projekt 1");
+		Project project2 = new Project();
+		project2.setName("Projekt 2");
+		
+		List<Project> projects = new ArrayList<Project>();
+		projects.add(project1);
+		projects.add(project2);
+		
+		employee.setProjects(projects);
+		
+		entityManager.persist(employee);
+		entityManager.persist(project1);
+		entityManager.persist(project2);
+		
+		entityManager.getTransaction().commit();
 		
 		entityManager.close();
 		
