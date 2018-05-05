@@ -11,7 +11,9 @@ import info.mpaczes.domain.Cat;
 import info.mpaczes.domain.Employee;
 import info.mpaczes.domain.Owner;
 import info.mpaczes.domain.Phone;
+import info.mpaczes.domain.Professor;
 import info.mpaczes.domain.Project;
+import info.mpaczes.domain.Student;
 
 public class Main {
 	
@@ -164,11 +166,11 @@ public class Main {
 //		entityManager.persist(owner);
 //		entityManager.persist(cat);
 		// relacja jeden do wielu :
-		Employee employee = new Employee();
-		
-		employee.setFirstName("Jan");
-		employee.setLastName("Nowak");
-		employee.setSalary(3333.3);
+//		Employee employee = new Employee();
+//		
+//		employee.setFirstName("Jan");
+//		employee.setLastName("Nowak");
+//		employee.setSalary(3333.3);
 		
 //		Phone phone1 = new Phone();
 //		Phone phone2 = new Phone();
@@ -189,20 +191,34 @@ public class Main {
 //		entityManager.persist(phone1);
 //		entityManager.persist(phone2);
 		
-		Project project1 = new Project();
-		project1.setName("Projekt 1");
-		Project project2 = new Project();
-		project2.setName("Projekt 2");
+//		Project project1 = new Project();
+//		project1.setName("Projekt 1");
+//		Project project2 = new Project();
+//		project2.setName("Projekt 2");
+//		
+//		List<Project> projects = new ArrayList<Project>();
+//		projects.add(project1);
+//		projects.add(project2);
+//		
+//		employee.setProjects(projects);
+//		
+//		entityManager.persist(employee);
+//		entityManager.persist(project1);
+//		entityManager.persist(project2);
 		
-		List<Project> projects = new ArrayList<Project>();
-		projects.add(project1);
-		projects.add(project2);
+		// dziedziczenie :
+		Professor professor = new Professor();
+		professor.setFirstName("Jan");
+		professor.setLastName("Nowak");
+		professor.setSalary(3333.3);
 		
-		employee.setProjects(projects);
+		Student student = new Student();
+		student.setFirstName("Maciej");
+		student.setLastName("Kowalski");
+		student.setAverageGrade(4.75);
 		
-		entityManager.persist(employee);
-		entityManager.persist(project1);
-		entityManager.persist(project2);
+		entityManager.persist(professor);
+		entityManager.persist(student);
 		
 		entityManager.getTransaction().commit();
 		
