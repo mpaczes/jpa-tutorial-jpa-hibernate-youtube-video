@@ -162,7 +162,7 @@ public class Main {
 //		
 //		owner.setCat(cat);
 		
-		entityManager.getTransaction().begin();
+//		entityManager.getTransaction().begin();
 //		entityManager.persist(owner);
 //		entityManager.persist(cat);
 		// relacja jeden do wielu :
@@ -207,20 +207,23 @@ public class Main {
 //		entityManager.persist(project2);
 		
 		// dziedziczenie :
-		Professor professor = new Professor();
-		professor.setFirstName("Jan");
-		professor.setLastName("Nowak");
-		professor.setSalary(3333.3);
+//		Professor professor = new Professor();
+//		professor.setFirstName("Jan");
+//		professor.setLastName("Nowak");
+//		professor.setSalary(3333.3);
+//		
+//		Student student = new Student();
+//		student.setFirstName("Maciej");
+//		student.setLastName("Kowalski");
+//		student.setAverageGrade(4.75);
+//		
+//		entityManager.persist(professor);
+//		entityManager.persist(student);
 		
-		Student student = new Student();
-		student.setFirstName("Maciej");
-		student.setLastName("Kowalski");
-		student.setAverageGrade(4.75);
+		// generowanie identyfikatorów metod¹ table :
+		addEmployees();
 		
-		entityManager.persist(professor);
-		entityManager.persist(student);
-		
-		entityManager.getTransaction().commit();
+//		entityManager.getTransaction().commit();
 		
 		entityManager.close();
 		
